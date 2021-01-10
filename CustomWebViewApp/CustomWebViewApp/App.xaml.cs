@@ -1,6 +1,5 @@
-﻿using System;
+﻿using CustomWebViewApp.Pages;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CustomWebViewApp
 {
@@ -10,7 +9,7 @@ namespace CustomWebViewApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new RenderizadorSitePage();
         }
 
         protected override void OnStart()
