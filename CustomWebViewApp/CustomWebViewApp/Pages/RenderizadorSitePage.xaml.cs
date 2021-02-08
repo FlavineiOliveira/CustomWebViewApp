@@ -14,15 +14,15 @@ namespace CustomWebViewApp.Pages
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<object>(this, MessageCenter.ABRIR_NAVEGADOR_PADRAO, async (sender) =>
+            MessagingCenter.Subscribe<object>(this, MessageCenter.ABRIR_NAVEGADOR_PADRAO, (sender) =>
             {
-                await AbrirNavegadorPadrao((string)sender);
+                AbrirNavegadorPadrao((string)sender);
             });
         }
 
-        private async Task AbrirNavegadorPadrao(string url)
+        private void AbrirNavegadorPadrao(string url)
         {
-            await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+            Device.OpenUri(new Uri(url));
         }
     }
 }
