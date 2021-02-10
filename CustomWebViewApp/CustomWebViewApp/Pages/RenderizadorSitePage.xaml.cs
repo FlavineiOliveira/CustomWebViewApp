@@ -14,9 +14,9 @@ namespace CustomWebViewApp.Pages
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<object>(this, MessageCenter.ABRIR_NAVEGADOR_PADRAO, (sender) =>
+            MessagingCenter.Subscribe<string>(this, MessageCenter.ABRIR_NAVEGADOR_PADRAO, (sender) =>
             {
-                AbrirNavegadorPadrao((string)sender);
+                AbrirNavegadorPadrao(sender);
             });
         }
 

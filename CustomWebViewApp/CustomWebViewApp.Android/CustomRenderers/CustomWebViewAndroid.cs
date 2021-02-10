@@ -3,6 +3,7 @@ using Android.Webkit;
 using CustomWebViewApp.CustomRenderers;
 using CustomWebViewApp.Droid.CustomRenderers;
 using CustomWebViewApp.Messages;
+using CustomWebViewApp.Models;
 using Java.Interop;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -12,7 +13,9 @@ namespace CustomWebViewApp.Droid.CustomRenderers
 {
     public class CustomWebViewAndroid : WebViewRenderer
     {
-        const string JavascriptFunction = "function botaoClick() { ClasseParaJavascript.myFunction(); }";
+        const string JavascriptFunction = "var navegacao = { Url: 'https://stackoverflow.com/questions/9749900/webview-addjavascriptinterface-function-with-parameters'};" +
+                                          " var data = JSON.stringify(navegacao); " +
+                                          "function botaoClick() { ClasseParaJavascript.myFunction(data); }";
         Context _context;
 
         public CustomWebViewAndroid(Context context) : base(context)
@@ -40,9 +43,11 @@ namespace CustomWebViewApp.Droid.CustomRenderers
     {
         [JavascriptInterface]
         [Export("myFunction")]
-        public void MyFunction()
+        public void MyFunction(string navegacao)
         {
-            MessagingCenter.Send<object>("https://docs.microsoft.com/pt-br/xamarin/essentials/", MessageCenter.ABRIR_NAVEGADOR_PADRAO);
+            var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Navegacao>(navegacao);
+
+            MessagingCenter.Send<string>(obj.Url, MessageCenter.ABRIR_NAVEGADOR_PADRAO);
         }
     }
 
